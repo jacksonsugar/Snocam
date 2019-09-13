@@ -13,7 +13,7 @@ wifi = 22
 
 ifswitch = "sudo /home/pi/Documents/Minion_tools/dhcp-switch.py"
 
-iwlist = 'sudo iwlist wlan0 scan | grep "Class_Hub"'
+iwlist = 'sudo iwlist wlan0 scan | grep "Snocam_Hub"'
 
 net_cfg = "ls /etc/ | grep dhcp"
 
