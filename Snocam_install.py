@@ -30,7 +30,7 @@ def yes_no(answer):
 
 # Configure the last 3 digits of IP 192.168.0.XXX
 
-IP_addr = input('What local IP extension would you like to use? ')
+IP_addr = input('What local IP extension would you like to use? 192.168.0.')
 
 if len(str(IP_addr)) > 3 or len(str(IP_addr)) < 1 or IP_addr <= 1 or IP_addr >= 255:
 	IP_fail = 1
