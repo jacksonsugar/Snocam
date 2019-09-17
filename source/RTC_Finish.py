@@ -70,4 +70,6 @@ with open('/etc/rc.local', 'w') as file:
 
 os.system('sudo python /home/pi/Documents/Minion_tools/dhcp-switch.py')
 
+os.system('sudo reboot now')
+
 print "DONE!"
