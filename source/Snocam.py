@@ -45,7 +45,7 @@ def picture():
         pictime = pictime.replace("  ","_")
         pictime = pictime.replace(" ","_")
         pictime = pictime.replace(":","-")
-	path, dirs, files = next(os.walk("/home/pi/Documents/minion_pics"))
+	path, dirs, files = next(os.walk("/home/pi/Documents/minion_pics/*"))
         pic_count = str(len(files)+1)
         pictime = pic_count + "-" + pictime
 	on()
