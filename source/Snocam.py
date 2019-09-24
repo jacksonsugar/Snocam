@@ -85,8 +85,8 @@ if __name__ == '__main__':
         print status
 
 	if status == "Connected":
-		os.system(subp)
 		flash()
+		os.system(subp)
 		quit()
 	else:
 		print 'Goodbye'
