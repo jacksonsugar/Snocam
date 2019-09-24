@@ -47,7 +47,7 @@ def picture():
         pictime = pictime.replace(":","-")
 	path, dirs, files = next(os.walk("/home/pi/Documents/minion_pics"))
         pic_count = str(len(files)+1)
-        pictime = pictime + "-" + pic_count
+        pictime = pic_count + "-" + pictime
 	on()
         camera.resolution = (2592, 1944)
         camera.framerate = 15
