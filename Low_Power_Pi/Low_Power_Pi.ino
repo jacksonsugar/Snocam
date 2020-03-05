@@ -1,26 +1,22 @@
 #include "LowPower.h"
 
-int Pi_off = 3;
-int Pi_on = 4;
-int WIFI_SIG = 5;
+int WIFI_SIG = 3;
+int Pi_on = 5;
+int IO = 6;
 int LED = 7;
+
 
 void setup(void)
 {
-  pinMode(LED, OUTPUT);
+  pinMode(WIFI_SIG, INPUT_PULLUP);
   pinMode(Pi_on, OUTPUT); 
-  pinMode(Pi_off, OUTPUT); 
-  pinMode(WIFI_SIG, INPUT );
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(IO, INPUT_PULLUP);
+  pinMode(LED, OUTPUT);
 
   digitalWrite(Pi_on, LOW);
   digitalWrite(LED, LOW);
 
-  digitalWrite(Pi_off, HIGH);
-  delay(500);
-  digitalWrite(Pi_off, LOW);
-
-  for(int i = 0; i < 3; i++){ 
+  for(int i = 0; i < 3; i++){
     digitalWrite(LED, HIGH);
     delay(400);
     digitalWrite(LED, LOW);
@@ -28,39 +24,44 @@ void setup(void)
   }
 }
 
-void loop(void) 
-{
-
+void Pi_Samp() {
   digitalWrite(Pi_on, HIGH);
-  delay(500);
-  digitalWrite(Pi_on, LOW);
 
-  for (int i = 1; i <= 10; i++){
+  for (int i = 1; i <= 12; i++){
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
   }
 
-  int sensorVal = digitalRead(WIFI_SIG);
+  int WIFI_Status = digitalRead(WIFI_SIG);
+  int Press_Status = digitalRead(IO);
 
   do {
-    LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-    //delay(4000);
-    sensorVal = digitalRead(WIFI_SIG);
+    digitalWrite(LED, HIGH);
+    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
+    WIFI_Status = digitalRead(WIFI_SIG);
+    Press_Status = digitalRead(IO);
   }
-  while (sensorVal == HIGH);
+  while (WIFI_Status == HIGH);
+
+  digitalWrite(LED, LOW);
 
   for (int i = 1; i <= 5; i++){
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
   }
 
-  
-  digitalWrite(Pi_off, HIGH);
-  delay(500);
-  digitalWrite(Pi_off, LOW);
+  digitalWrite(Pi_on, LOW);
+}
+
+void loop(void) 
+{
+
+  Pi_Samp();
 
   //This is the sleep cycle! Set for 150 cycles of 4 seconds for 10 minutes
-  for (int i = 1; i <= 15; i++){
+  for (int i = 1; i <= 75; i++){
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
   }
 
 }
+
+
 
